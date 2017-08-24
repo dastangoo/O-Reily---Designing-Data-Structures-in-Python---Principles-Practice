@@ -45,3 +45,20 @@ class LinkedList:
         if self.head is None:
             return 'link:[]'
         return 'link:[{0:s}]'.format(','.join(map(str,self)))
+
+def search(n, value):
+    # Base case
+    if n is None:
+        return False
+
+    # Action adn recursive step
+    if n.value == value:
+        return True
+    return search(n.next, value)
+def sum(n):
+    # Base case
+    if n is None:
+        return 0
+    # Action and recursive step
+    return n.value + sum(n.next)
+    
