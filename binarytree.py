@@ -39,6 +39,20 @@ class BinaryNode:
 class BinaryTree:
     def __init__(self):
         self.root = None
+    def getMin(self):
+        if self.root is None:
+            raise ValueError("Binary Tree is empty")
+        n = self.root
+        while n.left:
+            n = n.left
+        return n.value
+    def getMax(self):
+        if self.root is None:
+            raise ValueError("Binary Tree is empty")
+        n = self.root
+        while n.right:
+            n = n.right
+        return n.value
     def add(self, value):
         if self.root == None:
             self.root = BinaryNode(value)
@@ -47,6 +61,24 @@ class BinaryTree:
     def remove(self, value):
         if self.root is not None:
             self.root = self.root.remove(value)
+    def closest(self, target):
+        if self.root is None:
+            return None
+        node = self.root
+        best = node
+        distance = abs(self.root.value - target)
+        while node:
+            if abs(node.value - target) < distance:
+                best = node
+                distance = abs(node.value - target)
+            if target < node.value:
+                node = node.left
+            elif target > node.value:
+                node = node.right
+            else:
+                return target
+        return best.value
+
     def __contains__(self, target):
         node = self.root
         while node is not None:
