@@ -154,6 +154,20 @@ class BinaryNode:
                     newRoot = self.rotateLeftRight()
         newRoot.computeHeight()
         return newRoot
+    def __iter__(self):
+        """Useful debugging function to produce linear tree representation"""
+        if self.root:
+            for v in self.root.inorder():
+                yield v
+    def __repr__(self):
+        """Useful debugging function to produce linear tree representation"""
+        leftS = ''
+        rightS = ''
+        if self.left:
+            leftS = str(self.left)
+        if self.right:
+            rightS = str(self.right)
+        return "(L:" + leftS + " " + str(self.value) + "R:"
     def inorder(self):
         """In order traversal generator of tree rooted at giv"""
         if self.left:
@@ -164,6 +178,22 @@ class BinaryNode:
         if self.right:
             for v in self.right.inorder():
                 yield v
+class BinaryTree:
+    def __init__(self):
+        """Create empty binary tree."""
+        self.root = None
+
+    def __str__(self):
+        if self.root:
+            return str(self.root)
+
+    def add(self, value):
+        """Insert value into proper location in Binary Tree."""
+        if self.root is None:
+            self.root = BinaryNode(value)
+        else:
+            self.root = self.root.add(value)
+
     def __contains__(self, target):
         """Check whether BST contains target value."""
         node = self.root
@@ -175,13 +205,8 @@ class BinaryNode:
             else:
                 return True
         return False
-
     def __iter__(self):
-        """Useful debugging function to produce linear tree representation"""
-        if self.root:
-            for v in self.root.inorder():
-                yield v
+        pass
     def __repr__(self):
-        if self.root is None:
-            return "binary: ()"
-        return "binary:" + str(self.root)
+        pass
+    
