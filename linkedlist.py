@@ -36,6 +36,18 @@ class LinkedList:
         val = self.head.value
         self.head = self.head.next
         return val
+
+    def checkInfinite(self):
+        """Check whether infinite loop via next."""
+        p1 = p2 = self.head
+        while p1 != None and p2 != None:
+            if p2.next  == None:
+                return False
+            p1 = p1.next
+            p2 = p2.next.next
+            if p1 == p2:
+                return True
+        return False
     def __iter__(self):
         n = self.head
         while n != None:
