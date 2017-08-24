@@ -206,7 +206,11 @@ class BinaryTree:
                 return True
         return False
     def __iter__(self):
-        pass
+        """In order traversal of elements in the tree."""
+        if self.root:
+            for v in self.root.inorder():
+                yield v
     def __repr__(self):
-        pass
-    
+        if self.root is None:
+            return "binary: ()"
+        return "binary:" + str(self.root)
