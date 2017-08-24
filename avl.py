@@ -154,6 +154,13 @@ class BinaryNode:
                     newRoot = self.rotateLeftRight()
         newRoot.computeHeight()
         return newRoot
-    def __repr__(self):
+
+    def __iter__(self):
         """Useful debugging function to produce linear tree representation"""
-        
+        if self.root:
+            for v in self.root.inorder():
+                yield v
+    def __repr__(self):
+        if self.root is None:
+            return "binary: ()"
+        return "binary:" + str(self.root)
