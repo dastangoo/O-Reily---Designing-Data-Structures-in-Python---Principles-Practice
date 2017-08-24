@@ -11,8 +11,30 @@ class BinaryNode:
     def addToSubTree(self, parent, value):
         if parent is None:
             return BinaryNode(value)
-        parent.add(val)
+        parent.add(value)
         return parent
+    def remove(self, value):
+        if value < self.value:
+            self.left = self.removeFromParent(self.left, value)
+        elif value > self.value:
+            self.right = self.removeFromParent(self.right, value)
+        else:
+            if self.left is None:
+                return self.right
+            # find largest value in left subtree
+
+            child = self.left
+            while child.right:
+                child = child.right
+            childkey = child.value
+            self.left = self.removeFromParent(self.left, child, childkey)
+
+            self.value = childkey
+        return self
+    def removeFromParent(self, parent, value):
+        if parent:
+            return parent.remove(value)
+        return None
 
 class BinaryTree:
     def __init__(self):
@@ -23,7 +45,8 @@ class BinaryTree:
         else:
             self.root.add(value)
     def remove(self, value):
-        pass
+        if self.root is not None:
+            self.root = self.root.remove(value)
     def __contains__(self, target):
         node = self.root
         while node is not None:
