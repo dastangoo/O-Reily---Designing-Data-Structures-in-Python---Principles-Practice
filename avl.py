@@ -154,6 +154,27 @@ class BinaryNode:
                     newRoot = self.rotateLeftRight()
         newRoot.computeHeight()
         return newRoot
+    def inorder(self):
+        """In order traversal generator of tree rooted at giv"""
+        if self.left:
+            for v in self.left.inorder():
+                yield v
+        yield self.value
+
+        if self.right:
+            for v in self.right.inorder():
+                yield v
+    def __contains__(self, target):
+        """Check whether BST contains target value."""
+        node = self.root
+        while node:
+            if target < node.value:
+                node = node.left
+            elif target > node.value:
+                node = node.right
+            else:
+                return True
+        return False
 
     def __iter__(self):
         """Useful debugging function to produce linear tree representation"""
